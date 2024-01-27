@@ -1,0 +1,21 @@
+.modal-container{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7); 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 2;
+}
+
+.custom-modal{
+    height: 500px;
+    width: 800px;
+    border-radius: 10px;
+}
+
+.close-modal{
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
