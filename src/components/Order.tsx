@@ -9,9 +9,10 @@ function OrderComponent({ order }: { order: Order }) {
                 <small>{order.orderNum}</small>
             </div>
             <div className="card-body d-flex flex-column align-items-center">
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" className="btn btn-outline-dark" style={{fontSize: "15px"}}>Editar Orden</a>
+                
+                <a href="#" className="btn btn-outline-primary" style={{fontSize: "15px"}}>
+                    <i className="bi bi-pencil-fill me-2"></i>Editar Orden
+                </a>
             </div>
         </div>
     </div>
