@@ -1,5 +1,8 @@
+import { Product } from "./Product"
+
 export interface Detail{
-    OrderId?: string,
+    orderId?: string,
     productId: string,
+    product?: Product
     qty: Number
 }

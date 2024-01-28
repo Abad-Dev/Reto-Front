@@ -43,7 +43,7 @@ function Products() {
                     <p className="text-center mt-5">Obteniendo Productos...</p>
                 </div> : <div className="col-12">
                     <div className="products-container">
-                        {products.map(product => <ProductComponent product={product}/>)}
+                        {products.map(product => <ProductComponent key={product.id} product={product}/>)}
                     </div>
                 </div>
                 }

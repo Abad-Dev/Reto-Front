@@ -1,3 +1,13 @@
 .order-container{
-    max-width: 300px;
+    width: 300px;
+}
+
+.detail{
+    width: 100%;
+}
+
+.detail img{
+    max-height: 50px;
+    max-width: 200px;
+    margin-right: 10px;
 }

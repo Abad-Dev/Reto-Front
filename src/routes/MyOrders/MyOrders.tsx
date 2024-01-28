@@ -4,13 +4,14 @@ import { Order } from "../../models/Order.ts";
 import { OrderComponent } from "../../components/Order.tsx";
 import { Loader } from "../../components/Loader.tsx";
 
-import { getOrders } from "../../utils/index.ts";
+import { deleteOrder, getOrders } from "../../utils/index.ts";
 
 function MyOrders() {
     const [loading, setLoading] = React.useState<Boolean>(true);
     const [orders, setOrders] = React.useState<Order[]>([]);
 
     React.useEffect(() => {
+        document.title = "My Orders"
         const fetchData = async () => {
             try {
                 const res: Order[] = await getOrders();
@@ -25,6 +26,13 @@ function MyOrders() {
         fetchData();
     }, [])
 
+    const handleDeleteOrder = (orderId: string) => {
+        deleteOrder(orderId)
+            .then(_ => {
+                setOrders(orders => orders.filter(order => order.id != orderId))
+            })
+    }
+
     if (loading) {
         return <div className="container-fluid d-flex flex-column align-items-center justify-content-center my-5 py-5">
             <Loader />
@@ -32,14 +40,17 @@ function MyOrders() {
         </div>
     } else {
     return (
-        <div className="container orders-container">
-            {orders?.length > 0 ? orders.map((order, index) => (<OrderComponent order={order} key={index}/>)) 
-            : 
-            <div className="container-fluid">
-                <h1 className="text-center">
-                    No tiene Ordenes
-                </h1>
-            </div>}    
+        <div className="container">
+            <h2 className='mb-3'>My Orders:</h2>
+            <div className="orders-container">
+                {orders?.length > 0 ? orders.map((order) => (<OrderComponent order={order} key={String(order.id)} deleteOrder={handleDeleteOrder}/>)) 
+                : 
+                <div className="container-fluid">
+                    <h1 className="text-center">
+                        No tiene Ordenes
+                    </h1>
+                </div>}    
+            </div>
         </div>
         )
     }
