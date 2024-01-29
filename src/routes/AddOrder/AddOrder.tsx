@@ -194,7 +194,11 @@ function AddOrder() {
                     <label>Order Status:</label>
                         <select className='form-control' value={orderStatus} onChange={(e) => setOrderStatus(Number(e.target.value))}>
                             {Object.keys(OrderStatus).filter(key => !isNaN(Number(key))).map(key => (
-                                <option key={key} value={key}>{OrderStatus[Number(key)]}</option>
+                                <option key={key} value={key}>{
+                                    OrderStatus[Number(key)] == "InProgress" ? 
+                                    "In Progress"
+                                    : OrderStatus[Number(key)]
+                                }</option>
                             ))}
                         </select>
                     </div>

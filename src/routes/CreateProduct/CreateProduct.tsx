@@ -15,12 +15,21 @@ function CreateProduct() {
     })
 
     const [loading, setLoading] = React.useState<Boolean>(false);
+    const [priceError, setPriceError] = React.useState<string>("");
+    const [qtyError, setQtyError] = React.useState<string>("");
 
     const handleCreateProduct = () => {
+        if (Number(product.price) < 0) {
+            setPriceError("The prices can not be negatives.");
+            return;
+        }
+        if (Number(product.qtyInStock) < 0) {
+            setQtyError("The quantity can not be negative.");
+            return;
+        }
         setLoading(true)
         createProduct(product)
-            .then(data => {
-                console.log(data);
+            .then(_ => {
                 navigate("/products");
             })
             .catch(err => alert(err))
@@ -37,8 +46,11 @@ function CreateProduct() {
                         <label>Image (url):</label>
                         <input type="text" className="form-control" onChange={(e) => setProduct(prevProduct => ({...prevProduct, ["image"]: e.target.value}))} />
                     </div>
-                    <div className="col-5">
+                    <div className="col-5"> 
+                        {product.image.length > 0 ?
                         <img src={product.image} alt="..." />
+                        :""
+                        }
                     </div>
                 </div>
                 <div className="row">
@@ -50,12 +62,18 @@ function CreateProduct() {
                         <label>Price:</label>
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="basic-addon1">S/.</span>
-                            <input type="number" className="form-control" onChange={(e) => setProduct(prevProduct => ({...prevProduct, ["price"]: parseInt(e.target.value)}))}/>
+                            <input type="number" className="form-control" onChange={(e) => {setProduct(prevProduct => ({...prevProduct, ["price"]: parseInt(e.target.value)})); setPriceError("")}}/>
+                            <p className="text-danger">
+                                {priceError}
+                            </p>
                         </div>
                     </div>
                     <div className="col-6 col-md-3">
                         <label>Qty in Stock:</label>
-                        <input type="number" className="form-control" onChange={(e) => setProduct(prevProduct => ({...prevProduct, ["qtyInStock"]: parseInt(e.target.value)}))}/>
+                        <input type="number" className="form-control" onChange={(e) => {setProduct(prevProduct => ({...prevProduct, ["qtyInStock"]: parseInt(e.target.value)})); setQtyError("")}}/>
+                        <p className="text-danger">
+                            {qtyError}
+                        </p>
                     </div>
                 </div>
             </form>
@@ -63,7 +81,7 @@ function CreateProduct() {
             <div className="row">
                 <div className="col-12 d-flex justify-content-center">
                     <button className="btn btn-save" onClick={() => handleCreateProduct()}>
-                        Guardar y Crear
+                        Save and Create
                     </button>
                 </div>
             </div>

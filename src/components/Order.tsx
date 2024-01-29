@@ -4,16 +4,20 @@ import { Loader } from "./Loader";
 import "./Order.css";
 import { Link } from "react-router-dom";
 import { OrderStatus } from "../models/OrderStatus";
+import { DeleteModal } from "./DeleteModal";
 
 function OrderComponent({ order, deleteOrder }: { order: Order, deleteOrder: Function }) {
     const [loading, setLoading] = React.useState<boolean>(false);
+    const [modalOpened, setModalOpened] = React.useState<boolean>(false);
     
     const handleDelete = () => {
+        setModalOpened(false);
         setLoading(true); 
         deleteOrder(order.id)
     }
 
     return <div className="order-container m-2">
+        {modalOpened ? <DeleteModal handleDelete={handleDelete} closeModal={() => setModalOpened(false)} text="Are you sure you want to delete this order?"/> : ""}
         <div className="card">
             <div className={"card-header " + 
                 (order.status == OrderStatus.Pending ? "pending" :
@@ -30,7 +34,7 @@ function OrderComponent({ order, deleteOrder }: { order: Order, deleteOrder: Fun
                 {loading ? 
                 <div className="mb-3 d-flex flex-column align-items-center">
                     <Loader />
-                    &nbsp;&nbsp;Borrando...
+                    &nbsp;&nbsp;Deleting...
                 </div> :
                 order.details.map((detail, index) => 
                 <div className="detail" key={index}>
@@ -62,7 +66,7 @@ function OrderComponent({ order, deleteOrder }: { order: Order, deleteOrder: Fun
                         </button>
                     </Link>
 
-                    <button className="btn btn-outline-danger" style={{fontSize: "15px"}} onClick={() => handleDelete() } disabled={loading}>
+                    <button className="btn btn-outline-danger" style={{fontSize: "15px"}} onClick={() => setModalOpened(true) } disabled={loading}>
                         <i className="bi bi-trash-fill"></i>Delete Order
                     </button>
                 </div>

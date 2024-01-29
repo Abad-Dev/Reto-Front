@@ -45,7 +45,7 @@ function MyOrders() {
             {loading ? 
             <div className="container-fluid d-flex flex-column align-items-center justify-content-center my-5 py-5">
                 <Loader />
-                <p className="text-center mt-5">Obteniendo Ordenes...</p>
+                <p className="text-center mt-5">Loading Orders...</p>
             </div>
             :
             <div className="orders-container">

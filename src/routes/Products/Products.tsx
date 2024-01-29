@@ -40,7 +40,7 @@ function Products() {
                     <h2 className="mb-0">Products in Stock:</h2>
                     <Link className="ms-auto" to="/add-product">
                         <button className="btn btn-primary">
-                            + Agregar Producto
+                            + Add Product
                         </button>
                     </Link>
                 </div>
@@ -50,7 +50,7 @@ function Products() {
             <div className="row">
                 {loading ? <div className="container-fluid d-flex flex-column align-items-center justify-content-center my-5 py-5">
                     <Loader />
-                    <p className="text-center mt-5">Obteniendo Productos...</p>
+                    <p className="text-center mt-5">Loading Products...</p>
                 </div> : <div className="col-12">
                     <div className="products-container">
                         {products.map(product => <ProductComponent key={product.id} product={product} deleteProduct={handleDeleteProduct}/>)}
