@@ -2,8 +2,7 @@ import React, { ChangeEvent } from "react";
 import "./ProductsModel.css";
 import { Product } from "../models/Product";
 import { Detail } from "../models/Detail";
-
-function EditModal({ closeModal, products, detail, saveChanges  } : { closeModal: Function, products: Product[], detail: Detail, saveChanges: Function}){
+function EditModal({ closeModal, products, detail, saveChanges  } : { closeModal: Function, products: Product[], detail: Detail, saveChanges: Function }){
     const selectedProduct = products.find(prod => prod.id == detail.productId)!
     const [qty, setQty] = React.useState<Number>(detail.qty);
     const [error, setError] = React.useState<string>("");
@@ -16,11 +15,11 @@ function EditModal({ closeModal, products, detail, saveChanges  } : { closeModal
             setError("You have to order at least 1 Product");
             return;
         }
-        closeModal();
-        saveChanges({
+        saveChanges(detail, {
             productId: selectedProduct.id,
             qty: qty
         })
+        closeModal();
     }
 
     const handleChangeQty = (e: ChangeEvent) => {
@@ -46,7 +45,7 @@ function EditModal({ closeModal, products, detail, saveChanges  } : { closeModal
                                 ))}
                             </select>
                             <p className="mt-1 text-secondary">
-                                {selectedProduct ? "Available in stock: " + Number(Number(selectedProduct.qtyInStock) + Number(detail.qty)) : ""}
+                                Available in stock: {Number(Number(selectedProduct.qtyInStock) + Number(detail.qty))}
                             </p>
                         </div>
                         <div className="col-12">

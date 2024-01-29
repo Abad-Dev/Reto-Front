@@ -1,5 +1,5 @@
 .order-container{
-    width: 300px;
+    width: 310px;
 }
 
 .detail{
@@ -10,4 +10,16 @@
     max-height: 50px;
     max-width: 200px;
     margin-right: 10px;
+}
+
+.pending{
+    background-color: #f1f1f1;
+}
+
+.inprogress{
+    background-color: rgb(255, 223, 193);
+}
+
+.completed{
+    background-color: rgb(198, 255, 193);
 }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader";
 import React from "react";
-import { getProducts } from "../../utils";
+import { deleteProduct, getProducts } from "../../utils";
 import { Product } from "../../models/Product";
 import { ProductComponent } from "../../components/Product";
 import "./Products.css";
@@ -23,11 +23,21 @@ function Products() {
 
         fetchData();
     }, [])
+
+    const handleDeleteProduct = async (productId: string) => {
+        let response = await deleteProduct(productId)
+        if (response.ok){
+            setProducts(products => products.filter(product => product.id != productId))
+        } else {
+            let result = await response.text()
+            alert("Error: " + result);
+        }
+    }
     return(
         <div className="container">
             <div className="row">
                 <div className="col-12 d-flex">
-                    <h2 className="mb-0">Productos:</h2>
+                    <h2 className="mb-0">Products in Stock:</h2>
                     <Link className="ms-auto" to="/add-product">
                         <button className="btn btn-primary">
                             + Agregar Producto
@@ -43,7 +53,7 @@ function Products() {
                     <p className="text-center mt-5">Obteniendo Productos...</p>
                 </div> : <div className="col-12">
                     <div className="products-container">
-                        {products.map(product => <ProductComponent key={product.id} product={product}/>)}
+                        {products.map(product => <ProductComponent key={product.id} product={product} deleteProduct={handleDeleteProduct}/>)}
                     </div>
                 </div>
                 }

@@ -44,17 +44,20 @@ function ProductsModal({ closeModal, products, addDetail } : { closeModal: Funct
                     <button onClick={() => closeModal()} type="button" className="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="row w-100" style={{flexGrow: "1", overflowY: "auto"}}>
-                    <form>
                         <div className="col-12 mb-4">
                             <label>Select Product:</label>
                             <select className="form-control" onChange={(e) => handleSelect(e)} defaultValue="init">
                                 <option value="init" hidden>Choose here</option>
                                 {products.map(product => (
-                                    <option value={product.id} key={product.id} disabled={product.qtyInStock == 0}>{product.name}</option>
+                                    <option value={product.id} key={product.id} 
+                                        disabled={product.qtyInStock == 0}
+                                        >
+                                        {product.name} ({Number(product?.qtyInStock)})
+                                    </option>
                                 ))}
                             </select>
                             <p className="mt-1 text-secondary">
-                                {selectedProduct ? "Available in stock: " + selectedProduct.qtyInStock : ""}
+                                {selectedProduct ? "* Available in stock: " + selectedProduct.qtyInStock : ""}
                             </p>
                         </div>
                         <div className="col-12">
@@ -64,7 +67,6 @@ function ProductsModal({ closeModal, products, addDetail } : { closeModal: Funct
                                 {error}
                             </p>
                         </div>
-                    </form>
                 </div>
                 <div className="row py-2 w-100 d-flex justify-content-center">
                     <hr></hr>

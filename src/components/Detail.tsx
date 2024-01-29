@@ -1,7 +1,8 @@
+import { OrderStatus } from "../models/OrderStatus";
 import { Product } from "../models/Product";
 import "./Detail.css";
 
-function DetailComponent({ product, qty, deleteDetail, editDetail }: { product: Product, qty: Number, deleteDetail: Function, editDetail: Function }) {
+function DetailComponent({ product, qty, deleteDetail, editDetail, orderStatus }: { product: Product, qty: Number, deleteDetail: Function, editDetail: Function, orderStatus: OrderStatus }) {
     return (
     <div className="detail-container card">
         
@@ -18,7 +19,8 @@ function DetailComponent({ product, qty, deleteDetail, editDetail }: { product: 
                 x{Number(qty)}
             </b>
         </div>
-
+        
+        {orderStatus == OrderStatus.Completed ? "" : 
         <div className="d-flex ms-auto m-2" >
             <button className="btn btn-danger me-2" style={{fontSize: "14px"}} onClick={(e) => {e.preventDefault(); deleteDetail(product.id)}}>
                 Delete
@@ -27,6 +29,7 @@ function DetailComponent({ product, qty, deleteDetail, editDetail }: { product: 
                 <i className="bi bi-pencil-fill me-2"></i> Edit
             </button>
         </div>
+        }
     </div>
     )
 }
