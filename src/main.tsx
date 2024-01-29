@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
@@ -10,7 +10,7 @@ import { MyOrders } from './routes/MyOrders/MyOrders';
 import { Products } from './routes/Products/Products';
 import { CreateProduct } from './routes/CreateProduct/CreateProduct';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Root />,
