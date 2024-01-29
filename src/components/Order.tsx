@@ -45,7 +45,15 @@ function OrderComponent({ order, deleteOrder }: { order: Order, deleteOrder: Fun
                     </div>
                     <hr className="w-100"/>
                 </div>)}
-
+                
+                <div className="w-100">
+                    {order.details.length > 0 ? 
+                    <>
+                        <p className="mx-4">{order.details.map(detail => Number(detail.qty)).reduce((acc, val) => acc += val)} Products</p>
+                        <p className="mx-4 mb-3">Total: S/ {order.details.map(detail => Number(Number(detail.product?.price)*Number(detail.qty))).reduce((acc, val) => acc += val).toFixed(2)}</p>
+                    </>
+                    : ""}
+                </div>
 
                 <div className="d-flex">
                     <Link to={loading || order.status == OrderStatus.Completed ? "" : "/add-order/"+order.id} >

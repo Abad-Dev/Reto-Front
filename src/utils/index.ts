@@ -1,7 +1,7 @@
 import { Order } from "../models/Order";
 import { Product } from "../models/Product";
 
-const apiUrl = "http://localhost:5075";
+const apiUrl = "https://reto-be-6534cd6a162a.herokuapp.com";
 
 async function getOrder(orderId: string) {
     const response = await fetch(apiUrl + "/Order/" + orderId)
