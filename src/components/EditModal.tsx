@@ -60,7 +60,7 @@ function EditModal({ closeModal, products, detail, saveChanges  } : { closeModal
                 <div className="row py-2 w-100 d-flex justify-content-center">
                     <hr></hr>
                     <button className="btn btn-save" onClick={() => handleSave()}>
-                        Guardar
+                        Save
                     </button>
                 </div>
             </div>
